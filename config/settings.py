@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
@@ -49,6 +50,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     # react
     'corsheaders',
+#     filters
+    'django_filters',
 
 ]
 
@@ -89,28 +92,28 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql', #bu postgres ulanish
-#         'NAME': os.environ.get("DATABASE_NAME"),# database nomi
-#         'USER': os.environ.get('DATABASE_USER'), #user nomi
-#         'PASSWORD': os.environ.get('USER_PASSWORD'), #user paroli
-#         'HOST': os.environ.get("DATABASE_HOST"), #bu yerda host beriladi
-#         'PORT': os.environ.get('PORT'), #va post yoziladi va tayyor
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-# if 'test' in sys.argv:
-#     DATABASES['default'] = {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': ':memory:',
-#     }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql', #bu postgres ulanish
+        'NAME': os.environ.get("DATABASE_NAME"),# database nomi
+        'USER': os.environ.get('DATABASE_USER'), #user nomi
+        'PASSWORD': os.environ.get('USER_PASSWORD'), #user paroli
+        'HOST': os.environ.get("DATABASE_HOST"), #bu yerda host beriladi
+        'PORT': os.environ.get('PORT'), #va post yoziladi va tayyor
+    }
+}
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -204,3 +207,6 @@ DJOSER = {
     'SERIALIZERS': {},
 }
 
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL") # RabbitMQ yoki Redis URL manzili
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND") #Redis yoki boshqa natija

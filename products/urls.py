@@ -12,10 +12,10 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView
 )
 
+from products.views import UserViewSet, ProductViewSet, CategoryViewSet, CommentsViewSet, OrderViewSet, \
+    OrderItemsViewSet
 
 
-
-# from api.views import super_ai_translate, ai_chat
 
 
 class JWTSchemaGenerator(OpenAPISchemaGenerator):
@@ -32,22 +32,27 @@ class JWTSchemaGenerator(OpenAPISchemaGenerator):
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="API  ScholarMap",
+        title="API  Sword",
         default_version='v2',
-        description='API documentation for ScholarMap ',
+        description='API documentation for Sword ',
         terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="amanovjavlonbek25@gmail.com"),
+        contact=openapi.Contact(email="sword@gmail.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,
     permission_classes=[permissions.AllowAny],
     generator_class=JWTSchemaGenerator,
-    url='https://scholarmap.uz/api/v1/',
+    # url='',
 )
 
 router = DefaultRouter()
 
 router.register(r'users', UserViewSet)
+router.register(r'products', ProductViewSet)
+router.register(r'categories', CategoryViewSet)
+router.register(r'comments', CommentsViewSet)
+router.register(r'orders', OrderViewSet)
+router.register(r'order_items', OrderItemsViewSet)
 
 
 # router.register(r'users', UserViewSet)
@@ -82,7 +87,7 @@ urlpatterns = [
 #     path('v1/function-based/', your_functional_view, name="test_functional_view"),
 
 
-    path('v1/ai-chat/', ai_chat, name="ai_chat"),
+    # path('v1/ai-chat/', ai_chat, name="ai_chat"),
 
 ]
 
