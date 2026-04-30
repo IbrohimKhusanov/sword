@@ -210,3 +210,7 @@ DJOSER = {
 
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL") # RabbitMQ yoki Redis URL manzili
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND") #Redis yoki boshqa natija
+
+
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+ADMIN_CHAT_ID = os.environ.get('ADMIN_CHAT_ID')
