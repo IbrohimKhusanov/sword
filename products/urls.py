@@ -13,7 +13,7 @@ from rest_framework_simplejwt.views import (
 )
 
 from products.views import UserViewSet, ProductViewSet, CategoryViewSet, CommentsViewSet, OrderViewSet, \
-    OrderItemsViewSet
+    OrderItemsViewSet, ServicesViewSet, ContactLinkViewSet
 
 
 
@@ -52,6 +52,8 @@ router.register(r'products', ProductViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'comments', CommentsViewSet)
 router.register(r'orders', OrderViewSet)
+router.register(r'services', ServicesViewSet)
+router.register(r'contact_link', ContactLinkViewSet)
 router.register(r'order_items', OrderItemsViewSet)
 
 

@@ -7,7 +7,7 @@ User = get_user_model()
 
 
 class Comments(models.Model):
-    commet = models.TextField()
+    comment = models.TextField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
     rating = models.DecimalField(

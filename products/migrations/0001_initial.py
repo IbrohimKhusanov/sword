@@ -90,7 +90,7 @@ class Migration(migrations.Migration):
             name='Comments',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('commet', models.TextField()),
+                ('comment', models.TextField()),
                 ('rating', models.DecimalField(decimal_places=1, help_text='1 dan 10 gacha ball bering', max_digits=3, validators=[django.core.validators.MinValueValidator(1.0), django.core.validators.MaxValueValidator(10.0)])),
                 ('image', models.ImageField(blank=True, null=True, upload_to='user/%Y/%m/%d/')),
                 ('updated_at', models.DateTimeField(auto_now=True)),

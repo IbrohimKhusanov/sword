@@ -24,6 +24,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 COPY . /app/
+RUN mkdir -p /app/logs
 
 #Bunda dockerga loyihani hamma fayllarni containerga tashlanadi
 #Bunda hamma narsani o'rnatib app ni ichiga soldi"""

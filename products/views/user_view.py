@@ -9,6 +9,11 @@ from django.contrib.auth import get_user_model
 
 from products.serializers import UserSerializerConfig
 
+from products.filters import UserFilter
+
+from django_filters import rest_framework as django_filters
+from rest_framework import filters
+
 User = get_user_model()
 
 class CustomPagination(PageNumberPagination):
@@ -21,7 +26,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = UserSerializerConfig
-    # filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
-    # filterset_class = UserFilter
-    # search_fields = ['university', 'eslatma_matni', 'qolgan_kun', 'tugash_kun']
-    # pagination_class = CustomPagination
+    filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
+    filterset_class = UserFilter
+    search_fields = ['phone_number', 'email', 'first_name', 'address']
+    pagination_class = CustomPagination
