@@ -13,6 +13,7 @@ from products.filters import UserFilter
 
 from django_filters import rest_framework as django_filters
 from rest_framework import filters
+from products.signals import notify_admin
 
 User = get_user_model()
 

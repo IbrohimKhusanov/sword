@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # My app
-    'products',
+    # My app celery bilan
+    'products.apps.ProductConfig',
 #     Rest framework o'rnatilgan
     'rest_framework',
     'drf_yasg',
@@ -215,6 +215,8 @@ CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND") #Redis yoki bosh
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 ADMIN_CHAT_ID = os.environ.get('ADMIN_CHAT_ID')
 
+
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 
 # Logging uchun
 LOGGING = {

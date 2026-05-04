@@ -11,6 +11,10 @@ from products.filters.misc_filter import CommentsFilter, OrderFilter, OrderItems
 from products.models import Comments, Order, OrderItems
 from products.serializers import CommentsSerializerConfig, OrderSerializerConfig, OrderItemsSerializerConfig
 
+
+from django.db import transaction
+from products.signals import notify_admin  # yoki to'liq path
+
 class CustomPagination(PageNumberPagination):
     page_size = 5
 
@@ -36,6 +40,11 @@ class OrderViewSet(viewsets.ModelViewSet):
     filterset_class = OrderFilter
     search_fields = ['status', 'phone_number', 'user__phone_number', 'user__first_name']
     pagination_class = CustomPagination
+
+    def perform_create(self, serializer):
+        serializer.validated_data['user'] = self.request.user
+        order = serializer.save(user=self.request.user)
+        transaction.on_commit(lambda: notify_admin(order))
 
 
 class OrderItemsViewSet(viewsets.ModelViewSet):

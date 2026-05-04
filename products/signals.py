@@ -25,29 +25,27 @@ def activate_user(sender, instance, created, **kwargs):
 
 
 
-@receiver(post_save, sender=Order)
-def order_signal(sender, instance, created, **kwargs):
-    if created:
-        # transaction.on_commit hamma narsa bazaga yozilib bo'lganda ishlaydi
-        transaction.on_commit(lambda: notify_admin(instance))
 
 def notify_admin(instance):
+    instance.refresh_from_db()  # qo'shing
     items_text = ''
     for item in instance.items.all():
         name = item.product.name
         qty = item.quantity
         price = item.price_at_purchase
         total = qty * price
-
         items_text += f"🔹 {name}: {qty} dona — {total:,.0f} so'm\n"
 
-    phone_number = getattr(instance, 'phone_number', None) or instance.user.phone_number
-    address = getattr(instance, 'address', None) or instance.user.address
+    print(f"ITEMS COUNT: {instance.items.count()}")  # qo'shing
+    print(f"ITEMS TEXT: {items_text}")
+
+    phone_number = instance.phone_number or instance.user.phone_number
+    address = instance.address or instance.user.address
 
     send_telegram_notification.delay(
         order_id=instance.id,
         products=items_text,
-        gmail=instance.user.email,
+        mijoz=instance.user.first_name or instance.user.phone_number,
         phone_number=phone_number,
         address=address,
     )

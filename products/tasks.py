@@ -6,19 +6,23 @@ from celery import shared_task
 
 
 @shared_task(bind=True, max_retries=3) # Xato bo'lsa 3 marta qayta urinadi
-def send_telegram_notification(self, order_id, products, email, phone_number, address):
+def send_telegram_notification(self, order_id, products, mijoz, phone_number, address):
     # time.sleep(5)
     try:
         token = settings.TELEGRAM_BOT_TOKEN
-        message_text = (f"🆕 Yangi buyurtma: #{order_id}\n\n{products}\n👤 Mijoz: {email}\n"
-                        f"📞 Tel: {phone_number}\nAddress: {address}"),
+        message_text = (
+            f"🆕 Yangi buyurtma: #{order_id}\n\n"
+            f"{products}\n"
+            f"👤 Mijoz: {mijoz}\n"
+            f"📞 Tel: {phone_number}\n"
+            f"Address: {address}"
+        )
 
         response = requests.post(
             url=f"https://api.telegram.org/bot{token}/sendMessage",
             data={
                 "chat_id": settings.ADMIN_CHAT_ID,
                 "text": message_text,
-                "parse_mode": "HTML"  # Agar mahsulotlar matnida <b> ishlatsangiz kerak bo'ladi
             },
             timeout=10  # API javobini 10 soniyadan ko'p kutmaslik uchun
         )

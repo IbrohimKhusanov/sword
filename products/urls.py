@@ -53,8 +53,8 @@ router.register(r'categories', CategoryViewSet)
 router.register(r'comments', CommentsViewSet)
 router.register(r'orders', OrderViewSet)
 router.register(r'services', ServicesViewSet)
-router.register(r'contact_link', ContactLinkViewSet)
-router.register(r'order_items', OrderItemsViewSet)
+# router.register(r'contact_link', ContactLinkViewSet)
+# router.register(r'order_items', OrderItemsViewSet)
 
 
 # router.register(r'users', UserViewSet)
