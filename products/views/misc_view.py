@@ -22,7 +22,7 @@ class CustomPagination(PageNumberPagination):
 
 class CommentsViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
@@ -33,7 +33,7 @@ class CommentsViewSet(viewsets.ModelViewSet):
 
 class OrderViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     queryset = Order.objects.all()
     serializer_class = OrderSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
@@ -49,7 +49,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 class OrderItemsViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     queryset = OrderItems.objects.all()
     serializer_class = OrderItemsSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)

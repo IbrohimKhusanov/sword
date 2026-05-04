@@ -19,7 +19,7 @@ class CustomPagination(PageNumberPagination):
 
 class ServicesViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     queryset = Services.objects.all()
     serializer_class = ServicesSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
@@ -30,7 +30,7 @@ class ServicesViewSet(viewsets.ModelViewSet):
 
 class ContactLinkViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     queryset = ContactLink.objects.all()
     serializer_class = ContactLinkSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)

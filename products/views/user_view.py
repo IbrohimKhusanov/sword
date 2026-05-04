@@ -24,10 +24,16 @@ class CustomPagination(PageNumberPagination):
 
 class UserViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
     filterset_class = UserFilter
     search_fields = ['phone_number', 'email', 'first_name', 'address']
     pagination_class = CustomPagination
+
+    def get_permissions(self):
+        if self.action == 'create':  # POST /users/ — register
+            return [AllowAny()]
+        return [IsAuthenticated()]
+

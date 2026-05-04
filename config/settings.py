@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'rest_framework_simplejwt',
+    'djoser',
     # react
     'corsheaders',
 #     filters
@@ -199,12 +200,21 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')  # Sizning email manzilingiz
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # Sizning email parolingiz
 
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')  # qo'shing
+
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm?uid={uid}&token={token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'v1/auth/users/reset_password_confirm/?uid={uid}&token={token}',
     'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
-    'SERIALIZERS': {},
+    'SEND_PASSWORD_RESET_EMAIL': True,  # qo'shing
+    'PERMISSIONS': {
+        'password_reset': ['rest_framework.permissions.AllowAny'],
+        'password_reset_confirm': ['rest_framework.permissions.AllowAny'],
+    },
+    'SERIALIZERS': {
+        'password_reset': 'products.serializers.user_serializer.CustomPasswordResetSerializer',
+    },
 }
 
 
