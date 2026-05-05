@@ -8,7 +8,7 @@ User = get_user_model()
 class UserSerializerConfig(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'phone_number', 'email', 'first_name', 'address', 'is_active', 'is_staff', 'data_joined',
+        fields = ['id', 'phone_number', 'email', 'first_name', 'address', 'is_active', 'is_staff',
                   'password']
 
         extra_kwargs = {
@@ -16,8 +16,11 @@ class UserSerializerConfig(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
-
+        password = validated_data.pop('password')
+        user = User(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
 
 class CustomPasswordResetSerializer(SendEmailResetSerializer):
     def get_user(self, is_active=True):
