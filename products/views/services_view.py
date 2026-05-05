@@ -9,6 +9,7 @@ from products.models import Services, ContactLink
 from products.serializers import ServicesSerializerConfig, ContactLinkSerializerConfig
 from products.filters import ServicesFilter, ContactLinkFilter
 from rest_framework import filters
+from products.permissions import IsStaffOrReadOnly
 
 
 
@@ -19,7 +20,7 @@ class CustomPagination(PageNumberPagination):
 
 class ServicesViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsStaffOrReadOnly]
     queryset = Services.objects.all()
     serializer_class = ServicesSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
@@ -30,7 +31,7 @@ class ServicesViewSet(viewsets.ModelViewSet):
 
 class ContactLinkViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsStaffOrReadOnly]
     queryset = ContactLink.objects.all()
     serializer_class = ContactLinkSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)

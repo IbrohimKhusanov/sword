@@ -1,5 +1,5 @@
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticated, AllowAny
+# from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from rest_framework import viewsets
@@ -10,7 +10,7 @@ from products.filters.product_filter import CategoryFilter, ProductFilter
 
 from products.models import Product, Category
 from products.serializers import ProductSerializerConfig, CategorySerializerConfig
-
+from products.permissions import IsStaffOrReadOnly
 class CustomPagination(PageNumberPagination):
     page_size = 5
 
@@ -18,7 +18,7 @@ class CustomPagination(PageNumberPagination):
 
 class CategoryViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsStaffOrReadOnly]
     queryset = Category.objects.all()
     serializer_class = CategorySerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
@@ -29,7 +29,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class ProductViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsStaffOrReadOnly]
     queryset = Product.objects.all()
     serializer_class = ProductSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)

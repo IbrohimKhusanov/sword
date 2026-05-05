@@ -11,6 +11,7 @@ from products.filters.misc_filter import CommentsFilter, OrderFilter, OrderItems
 from products.models import Comments, Order, OrderItems
 from products.serializers import CommentsSerializerConfig, OrderSerializerConfig, OrderItemsSerializerConfig
 
+from products.permissions import IsStaffOrReadOnly
 
 from django.db import transaction
 from products.signals import notify_admin  # yoki to'liq path
@@ -22,7 +23,7 @@ class CustomPagination(PageNumberPagination):
 
 class CommentsViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsStaffOrReadOnly]
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
@@ -33,7 +34,7 @@ class CommentsViewSet(viewsets.ModelViewSet):
 
 class OrderViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsStaffOrReadOnly]
     queryset = Order.objects.all()
     serializer_class = OrderSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
@@ -49,7 +50,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 class OrderItemsViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsStaffOrReadOnly]
     queryset = OrderItems.objects.all()
     serializer_class = OrderItemsSerializerConfig
     filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
