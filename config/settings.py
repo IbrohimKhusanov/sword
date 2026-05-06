@@ -226,9 +226,23 @@ TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 ADMIN_CHAT_ID = os.environ.get('ADMIN_CHAT_ID')
 
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000",
-		 "https://sword.shops-platform.uz",]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
+CORS_ALLOWED_ORIGINS = [
+    "https://sword.shops-platform.uz",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://sword.shops-platform.uz",
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 # Logging uchun
 LOGGING = {
     'version': 1,
