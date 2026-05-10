@@ -15,7 +15,7 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ec2-user/ScholarMap  
+            cd /home/ec2-user/sword  
             git fetch origin main
             sudo chown -R ec2-user:ec2-user .        
             git reset --hard origin/main
