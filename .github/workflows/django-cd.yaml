@@ -27,14 +27,11 @@ jobs:
             fi
                     
             docker-compose up -d --force-recreate
-            docker-compose exec -T web python manage.py makemigrations
             docker-compose exec -T web python manage.py migrate
             docker-compose exec -T web python manage.py collectstatic --noinput
 
 
             docker image prune -f
-            docker-compose logs web --tail=50     
-            docker-compose ps -a
 
 
 
