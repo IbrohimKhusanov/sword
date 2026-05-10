@@ -14,7 +14,7 @@ class ServicesSerializerConfig(serializers.ModelSerializer):
 
     class Meta:
         model = Services
-        fields = ['id', 'name', 'description', 'image', 'price', 'contacts']
+        fields = ['id', 'name', 'description', 'price', 'contacts']
 
     def create(self, validated_data):
         contacts_data = validated_data.pop('contacts', [])
