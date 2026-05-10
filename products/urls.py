@@ -42,7 +42,7 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=[permissions.AllowAny],
     generator_class=JWTSchemaGenerator,
-    url='https://sword.shops-platform.uz/',
+    url='https://skritno.sword.uz/',
 )
 
 router = DefaultRouter()
