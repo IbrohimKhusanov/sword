@@ -1,6 +1,5 @@
 from django_filters import rest_framework as django_filters  #pip install django-filter
-from products.models import Comments, User, Product, Category
-
+from products.models import Comments, User, Product, Category, Images
 
 
 class CategoryFilter(django_filters.FilterSet):
@@ -33,3 +32,12 @@ class ProductFilter(django_filters.FilterSet):
     class Meta:
         model = Product
         fields = ['name', 'description', 'price', 'category', 'qoldiq', 'size']
+
+class ImageFilter(django_filters.FilterSet):
+    product = django_filters.NumberFilter(field_name="product_id", lookup_expr='exact')
+    comment = django_filters.NumberFilter(field_name="comment_id", lookup_expr='exact')
+    service = django_filters.NumberFilter(field_name="service_id", lookup_expr='exact')
+
+    class Meta:
+        model = Images
+        fields = ['product', 'comment', 'service']

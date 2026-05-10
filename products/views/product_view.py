@@ -8,6 +8,7 @@ from rest_framework import viewsets, status
 from django_filters import rest_framework as django_filters
 from rest_framework import filters
 
+from products.filters import ImageFilter
 from products.filters.product_filter import CategoryFilter, ProductFilter
 
 from products.models import Product, Category, Images
@@ -44,9 +45,8 @@ class ImagesViewSet(viewsets.ModelViewSet):
     permission_classes = [IsStaffOrReadOnly]
     queryset = Images.objects.all()
     serializer_class = ImagesSerializerConfig
-    # filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
-    # filterset_class = ProductFilter
-    # search_fields = ['name', 'description', 'size', 'price']
+    filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
+    filterset_class = ImageFilter
     pagination_class = CustomPagination
 
     def create(self, request, *args, **kwargs):

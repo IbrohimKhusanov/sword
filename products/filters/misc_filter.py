@@ -1,6 +1,5 @@
 from django_filters import rest_framework as django_filters  #pip install django-filter
-from products.models import Comments, Services, OrderItems, Order, ContactLink
-
+from products.models import Comments, Services, OrderItems, Order, ContactLink, Images
 
 
 class CommentsFilter(django_filters.FilterSet):
@@ -70,3 +69,5 @@ class ContactLinkFilter(django_filters.FilterSet):
     class Meta:
         model = ContactLink
         fields = ['service', 'contact_type', 'value']
+
+
