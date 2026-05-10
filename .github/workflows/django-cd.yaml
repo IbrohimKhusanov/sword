@@ -32,7 +32,8 @@ jobs:
 
 
             docker image prune -f
-            docker-compose logs web --tail=50            
+            docker-compose logs web --tail=50     
+            docker-compose ps -a
 
 
 
