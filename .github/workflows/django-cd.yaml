@@ -27,7 +27,7 @@ jobs:
             fi
                     
             docker-compose up -d --force-recreate
-            docker-compose exec -T web python manage.py makemigration
+            docker-compose exec -T web python manage.py makemigrations
             docker-compose exec -T web python manage.py migrate
             docker-compose exec -T web python manage.py collectstatic --noinput
 
