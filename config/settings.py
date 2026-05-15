@@ -248,18 +248,15 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
         'file': {
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': 'logs/django.log',
             'maxBytes': 1024 * 1024 * 5,  # 5 MB
-            'backupCount': 5,  # maksimum 5 ta fayl
+            'backupCount': 5,
         },
     },
     'root': {
-        'handlers': ['console', 'file'],
+        'handlers': ['file'],
         'level': 'WARNING',
     },
 }
