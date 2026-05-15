@@ -12,7 +12,6 @@ services:
 
   web:
     build: .
-    # Ustozingiz uslubidagi avtomatlashtirilgan command:
     command: >
       bash -c "python manage.py migrate &&
                python manage.py collectstatic --no-input &&
@@ -22,7 +21,7 @@ services:
       - .:/app
       - ./media:/app/media
       - ./staticfiles:/app/staticfiles
-      - logs_volume:/app/logs  # ✅ qo'shing
+      - logs_volume:/app/logs
 
 
     ports:
@@ -68,7 +67,7 @@ services:
     volumes:
       - .:/app
       - media_volume:/app/media
-      - logs_volume:/app/logs  # ✅ qo'shing
+      - logs_volume:/app/logs
     logging:
       driver: "json-file"
       options:
@@ -84,5 +83,5 @@ services:
 volumes:
   postgres_data:
   media_volume:
-  logs_volume:  # ✅ qo'shing
+  logs_volume:
 
