@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['sword.uz', 'www.sword.uz', 'skritno.sword.uz']
 
 
 # Application definition
@@ -155,7 +155,8 @@ AUTH_USER_MODEL = 'products.CustomUser'
 
 # Static fayllar uchun (CSS, JS, rasmlar - loyiha dizayni uchun)
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [STATIC_DIR] if os.path.exists(STATIC_DIR) else []
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -235,6 +236,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://sword.shops-platform.uz",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    'https://skritno.sword.uz',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
