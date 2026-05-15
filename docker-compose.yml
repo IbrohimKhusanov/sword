@@ -33,6 +33,11 @@ services:
       - db
       - redis
       - rabbitmq
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
 
   rabbitmq:
     image: rabbitmq:latest
@@ -41,11 +46,21 @@ services:
       RABBITMQ_DEFAULT_PASS: guest
     ports:
       - "5673:5672"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
 
   redis:
     image: redis:latest
     ports:
       - "6380:6379"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
 
   celery:
     build: .
@@ -54,6 +69,11 @@ services:
       - .:/app
       - media_volume:/app/media
       - logs_volume:/app/logs  # ✅ qo'shing
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
 
     depends_on:
       - rabbitmq
